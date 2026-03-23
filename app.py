@@ -40,12 +40,13 @@ if st.sidebar.button("Run Diagnostics"):
     risk_index = risk_row['make_model_risk'].values[0] if not risk_row.empty else risk_df['make_model_risk'].mean()
 
     # Format data for XGBoost (Matching your training columns exactly)
+    # Format data for XGBoost (Matching your training columns EXACTLY)
+    # Notice that 'fuel_clean_Diesel' is intentionally missing!
     input_data = pd.DataFrame({
         'vehicle_age': [age],
         'test_mileage': [mileage],
         'miles_per_year': [mpy],
         'make_model_risk': [risk_index],
-        'fuel_clean_Diesel': [1 if fuel == 'Diesel' else 0],
         'fuel_clean_Electric': [1 if fuel == 'Electric' else 0],
         'fuel_clean_Hybrid': [1 if fuel == 'Hybrid' else 0],
         'fuel_clean_Other': [1 if fuel == 'Other' else 0],
